@@ -52,7 +52,7 @@ const ArtworkList = {
               record.data.ddata,
               record.data.ts,
               record.data.seq,
-              record.data.dhash
+              record.data.dhash,
             ]),
           noRowsText: 'No records found'
         })
