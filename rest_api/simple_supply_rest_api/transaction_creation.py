@@ -64,11 +64,9 @@ def make_create_agent_transaction(transaction_signer,
 
 
 def make_create_record_transaction(transaction_signer,
-                                   batch_signer,
-                                   latitude,
-                                   longitude,
-                                   record_id,
-                                   timestamp):
+                                   batch_signer,device,
+                                   seq, ts, ddata, dsize, dhash,
+                                   timestamp,record_id):
     """Make a CreateRecordAction transaction and wrap it in a batch
 
     Args:
@@ -93,8 +91,12 @@ def make_create_record_transaction(transaction_signer,
 
     action = payload_pb2.CreateRecordAction(
         record_id=record_id,
-        latitude=latitude,
-        longitude=longitude)
+        seq=seq,
+            ts=ts,
+            device=device,
+            ddata=ddata,
+            dsize=dsize,
+            dhash=dhash)
 
     payload = payload_pb2.SimpleSupplyPayload(
         action=payload_pb2.SimpleSupplyPayload.CREATE_RECORD,
@@ -156,8 +158,7 @@ def make_transfer_record_transaction(transaction_signer,
 
 def make_update_record_transaction(transaction_signer,
                                    batch_signer,
-                                   latitude,
-                                   longitude,
+                                   seq, ts, device, ddata, dsize, dhash,
                                    record_id,
                                    timestamp):
     """Make a CreateRecordAction transaction and wrap it in a batch
@@ -183,8 +184,13 @@ def make_update_record_transaction(transaction_signer,
 
     action = payload_pb2.UpdateRecordAction(
         record_id=record_id,
-        latitude=latitude,
-        longitude=longitude)
+        seq=seq,
+            ts=ts,
+            device=device,
+            ddata=ddata,
+            dsize=dsize,
+            dhash=dhash,
+            timestamp=timestamp)
 
     payload = payload_pb2.SimpleSupplyPayload(
         action=payload_pb2.SimpleSupplyPayload.UPDATE_RECORD,
