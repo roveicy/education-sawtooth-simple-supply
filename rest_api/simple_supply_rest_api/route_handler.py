@@ -29,7 +29,8 @@ from simple_supply_rest_api.errors import ApiUnauthorized
 
 
 LOGGER = logging.getLogger(__name__)
-
+USERNAME = 'testusername'
+PASSWORD = 'testpassword'
 
 class RouteHandler(object):
     def __init__(self, loop, messenger, database):
@@ -62,6 +63,9 @@ class RouteHandler(object):
         body = await decode_request(request)
         required_fields = ['name', 'password']
         validate_fields(required_fields, body)
+        
+        if body.get('password') != PASSWORD || body.get('name') != USERNAME:
+            raise ApiUnauthorized('Not Authorized')
 
         public_key, private_key = self._messenger.get_new_key_pair()
 
