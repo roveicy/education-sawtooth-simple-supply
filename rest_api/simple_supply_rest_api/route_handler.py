@@ -64,7 +64,7 @@ class RouteHandler(object):
         required_fields = ['name', 'password']
         validate_fields(required_fields, body)
         
-        if body.get('password') != PASSWORD || body.get('name') != USERNAME:
+        if body.get('password') != PASSWORD or body.get('name') != USERNAME:
             raise ApiUnauthorized('Not Authorized')
 
         public_key, private_key = self._messenger.get_new_key_pair()
